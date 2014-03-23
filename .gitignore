@@ -1,0 +1,5 @@
+.cabal-sandbox/
+.ghci
+dist/
+log/
+
