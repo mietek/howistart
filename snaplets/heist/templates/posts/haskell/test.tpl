@@ -1,10 +1,13 @@
+<apply template="base">
+    <div class="container">
+
 <p>Here's what a delimited code block looks like:</p>
 <pre><code>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.haskell}
 -- | Inefficient quicksort in haskell.
 qsort :: (Enum a) =&gt; [a] -&gt; [a]
 qsort []     = []
 qsort (x:xs) = qsort (filter (&lt; x) xs) ++ [x] ++
-               qsort (filter (&gt;= x) xs) 
+               qsort (filter (&gt;= x) xs)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</code></pre>
 <p>And here's how it looks after syntax highlighting:</p>
 <pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- | Inefficient quicksort in haskell.</span>
@@ -49,3 +52,6 @@ qsort (x<span class="fu">:</span>xs) <span class="fu">=</span> qsort (filter (<s
     <span class="ot">self</span>.state_transitions_any = {}
     <span class="ot">self</span>.default_transition = <span class="ot">None</span>
     ...</code></pre></td></tr></table>
+
+    </div>
+    </apply>

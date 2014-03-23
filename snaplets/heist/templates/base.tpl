@@ -8,10 +8,10 @@
     <title>How I Start.</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS for the 'Thumbnail Gallery' Template -->
-    <link href="css/1-col-portfolio.css" rel="stylesheet">
+    <link href="/css/1-col-portfolio.css" rel="stylesheet">
     <style type="text/css">code{white-space: pre;}</style>
     <style type="text/css">
       table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {

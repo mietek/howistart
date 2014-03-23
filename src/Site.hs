@@ -9,18 +9,27 @@ module Site
   ) where
 
 ------------------------------------------------------------------------------
-import  Data.ByteString (ByteString)
-import  Snap.Snaplet
-import  Snap.Snaplet.Heist
-import  Snap.Util.FileServe
-import  Heist
+import Data.ByteString as B
+import Data.Maybe
+import Snap.Snaplet
+import Snap.Core
+import Snap.Snaplet.Heist
+import Snap.Util.FileServe
+
 ------------------------------------------------------------------------------
 import  Application
+
+postHandler :: Handler App App ()
+postHandler = do
+  category <- getParam "category"
+  title <- getParam "title"
+  render $ B.intercalate "/" ["posts", fromJust category, fromJust title]
 
 ------------------------------------------------------------------------------
 -- | The application's routes.
 routes :: [(ByteString, Handler App App ())]
-routes = [ ("", serveDirectory "static")
+routes = [("/posts/:category/:title", postHandler)
+          ,("", serveDirectory "static")
          ]
 
 
