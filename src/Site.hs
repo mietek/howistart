@@ -19,6 +19,15 @@ import Snap.Util.FileServe
 ------------------------------------------------------------------------------
 import  Application
 
+--posts :: [B.ByteString]
+--posts = [("haskell", ["test"])]
+
+categoryHandler :: Handler App App ()
+categoryHandler = do
+  category <- getParam "category"
+  title <- getParam "title"
+  render $ B.intercalate "/" ["posts", fromJust category, fromJust title]
+
 postHandler :: Handler App App ()
 postHandler = do
   category <- getParam "category"
@@ -26,15 +35,13 @@ postHandler = do
   render $ B.intercalate "/" ["posts", fromJust category, fromJust title]
 
 ------------------------------------------------------------------------------
--- | The application's routes.
 routes :: [(ByteString, Handler App App ())]
 routes = [("/posts/:category/:title", postHandler)
-          ,("", serveDirectory "static")
+         ,("/posts/:category", categoryHandler)
+         ,("", serveDirectory "static")
          ]
 
-
 ------------------------------------------------------------------------------
--- | The application initializer.
 app :: SnapletInit App App
 app = makeSnaplet "app" "How I Start." Nothing $ do
     h <- nestSnaplet "" heist $ heistInit "templates"

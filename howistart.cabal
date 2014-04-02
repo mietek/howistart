@@ -7,7 +7,7 @@ Author:              Author
 Maintainer:          maintainer@example.com
 Stability:           Experimental
 Category:            Web
-Build-type:          Simple
+Build-type:          Custom
 Cabal-version:       >=1.2
 
 Flag development
@@ -33,7 +33,9 @@ Executable howistart
     snap-loader-static        >= 0.9     && < 0.10,
     text                      >= 0.11    && < 1.2,
     time                      >= 1.1     && < 1.5,
-    xmlhtml                   >= 0.1
+    xmlhtml                   >= 0.1,
+    filemanip                 >= 0.3.6.2,
+    pandoc                    >= 1.12.3.3
 
   if flag(old-base)
     build-depends:
