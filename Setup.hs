@@ -25,5 +25,7 @@ search pat dir =
 convertToHtml = writeHtmlString def . readMarkdown def
 
 convertFileToHtml file =
-  let newFile = replaceExtension file "html" in
-  readFile file >>= writeFile newFile . convertToHtml
+  let configFile = replaceExtension file "cfg"
+      newFile = replaceExtension file "html"
+  in
+   readFile file >>= writeFile newFile . convertToHtml

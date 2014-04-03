@@ -50,11 +50,11 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/erlang">Erlang</a>
-                    </li>
-                    <li><a href="/about">About</a>
-                    </li>
+              <ul class="nav navbar-nav">
+                <categories>
+                  <li><a href="/posts/${category}"><category /></a></li>
+                </categories>
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
