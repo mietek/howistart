@@ -10,9 +10,14 @@ import Control.Lens
 import Snap.Snaplet
 import Snap.Snaplet.Heist
 
+import Types
+
 ------------------------------------------------------------------------------
 data App = App
-    { _heist :: Snaplet (Heist App)
+    {
+      _heist :: Snaplet (Heist App)
+    , _categories :: Categories
+    , _posts :: Posts
     }
 
 makeLenses ''App

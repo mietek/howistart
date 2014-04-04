@@ -1,9 +1,15 @@
 <apply template="base">
+  <div class="container">
+    <div class="row">
 
-    <div class="container">
-         <posts>
-        <li><a href="/posts/${category}/${title}"><title /></a></li>
-        </posts>
+      <div class="col-lg-12">
+        <h1 class="page-header"><category />
+          <small><categoryDesc /></small>
+        </h1>
+      </div>
+
     </div>
 
+    <apply template="_posts" />
+  </div>
 </apply>
