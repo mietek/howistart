@@ -1,15 +1,15 @@
 <posts>
   <div class="row">
 
-    <div class="col-lg-7 col-md-7">
-      <div class="col-md-4 col-md-offset-4">
+    <div class="col-lg-6 col-md-6">
+      <div class="col-md-5 col-md-offset-5">
         <a href="/posts/${category}/${key}">
-          <img class="img-responsive" src="/images/${key}/headshot.jpg" alt="">
+          <img class="img-responsive" src="/images/${key}/headshot1.png" alt="">
         </a>
       </div>
     </div>
 
-    <div class="col-lg-5 col-md-5">
+    <div class="col-lg-6 col-md-6">
       <h3><author /></h3>
       <h4><title /></h4>
       <h3><small> <subheading /></small></h3>
