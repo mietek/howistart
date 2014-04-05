@@ -41,7 +41,7 @@ indexHandler = do
   cs <- gets _categories
   ps <- gets _posts
   renderWithSplices (B.intercalate "/" ["index"])
-      (do "posts" ## I.mapSplices (I.runChildrenWith . splicesFromPost cs) ps)
+      ("posts" ## I.mapSplices (I.runChildrenWith . splicesFromPost cs) ps)
 
 renderList :: T.Text -> [T.Text] -> SnapletISplice App
 renderList label = I.mapSplices (\x -> I.runChildrenWith (label ## I.textSplice x))
@@ -53,7 +53,7 @@ app = makeSnaplet "app" "How I Start." Nothing $ do
   let (c, p) = read f :: (Categories, Posts)
   let categoryNames = [name | (_, Category name _ _) <- c]
   let config = mempty {
-        hcInterpretedSplices = "categories" ## (renderList "category" categoryNames)
+        hcInterpretedSplices = "categories" ## renderList "category" categoryNames
         }
   addRoutes routes
   h <- nestSnaplet "" heist $ heistInit "templates"

@@ -22,10 +22,12 @@ categoryHandler = do
   ps <- gets _posts
   cs <- gets _categories
   case lookupCategoryByName c cs of
-    Nothing ->
-      render ""
+    Nothing -> do
+      modifyResponse $ setResponseStatus 404 "Category Not Found"
+      renderWithSplices "404" $ "msg" ## I.textSplice "Category Not Found"
     Just (categoryAtom, Category n d _) ->
       renderWithSplices (B.intercalate "/" ["category"])
         (do "category" ## I.textSplice n
             "categoryDesc" ## I.textSplice d
-            "posts" ## I.mapSplices (I.runChildrenWith . splicesFromPost cs) (lookupPostsByCategory categoryAtom ps))
+            "posts" ## I.mapSplices (I.runChildrenWith . splicesFromPost cs)
+              (lookupPostsByCategory categoryAtom ps))

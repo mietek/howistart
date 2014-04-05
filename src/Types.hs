@@ -7,6 +7,8 @@ module Types
     ,Categories
     ,Post(..)
     ,Posts
+    ,postExists
+    ,lookupCategoryAtom
     ,lookupPostsByCategory
     ,lookupCategoryByName
     ,categoryName
@@ -15,6 +17,7 @@ module Types
 
 ------------------------------------------------------------------------------
 import Heist
+import Data.Maybe
 import Data.List as L
 import Data.Text.Encoding
 import qualified Data.Text as T
@@ -42,9 +45,22 @@ data Post = Post {
 
 type Posts = [Post]
 
+postExists :: CategoryAtom -> Integer -> Posts -> Bool
+postExists c k ps =
+  isJust $ L.find (\p -> key p == k && category p == c) ps
+
+lookupCategoryAtom :: B.ByteString -> Categories -> Maybe CategoryAtom
+lookupCategoryAtom c cs =
+  let
+    lowerName = T.toLower (decodeUtf8 c)
+  in
+   case L.find (\(_, Category name _ _) -> name == lowerName) cs of
+     Just (cAtom, _) -> Just cAtom
+     Nothing -> Nothing
+
 lookupPostsByCategory :: CategoryAtom -> Posts -> Posts
 lookupPostsByCategory c ps =
-  Prelude.filter (\p -> (category p) == c) ps
+  Prelude.filter (\p -> category p == c) ps
 
 lookupCategoryByName :: Maybe B.ByteString -> Categories -> Maybe (CategoryAtom, Category)
 lookupCategoryByName Nothing _ = Nothing
