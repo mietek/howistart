@@ -14,7 +14,7 @@
       <h4><title /></h4>
       <h3><small> <subheading /></small></h3>
       <p><bio /></p>
-      <a class="btn btn-primary" href="/posts/${category}/${key}">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+      <a class="btn btn-primary" href="/posts/${category}/${key}">Read <span class="glyphicon glyphicon-chevron-right"></span></a>
     </div>
 
   </div>
