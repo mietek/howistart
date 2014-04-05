@@ -2,4 +2,4 @@
 .ghci
 dist/
 log/
-
+snaplets/heist/templates/posts/*/*/index.tpl
