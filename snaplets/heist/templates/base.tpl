@@ -52,7 +52,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav">
                 <categories>
-                  <li><a href="/posts/${category}"><category /></a></li>
+                  <li class="category"><a href="/posts/${category}"><category /></a></li>
                 </categories>
 
                 </ul>

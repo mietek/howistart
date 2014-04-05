@@ -52,7 +52,7 @@ lookupCategoryByName (Just n) cs =
   let
     lowerName = T.toLower (decodeUtf8 n)
   in
-   L.find (\(_, Category name _ _) -> (T.toLower name) == lowerName) cs
+   L.find (\(_, Category name _ _) -> name == lowerName) cs
 
 categoryName :: CategoryAtom -> [(CategoryAtom, Category)] -> T.Text
 categoryName a c =
