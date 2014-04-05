@@ -144,7 +144,8 @@ yeah -- that's to be avoided.
 I decide to start with the basic stuff to prototype, state transitions. I go for
 them in a fairly simple manner, top-down:
 
-    -module(muumuu_fsm).
+```erlang
+-module(muumuu_fsm).
     -export([start/0]).
 
     -define(MAX_NO_VENT, 5).
@@ -192,6 +193,7 @@ them in a fairly simple manner, top-down:
                 end
         end,
         wait_for_command().
+```
 
 In this bit of code, we can see our 4 main states:
 

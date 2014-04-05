@@ -22,7 +22,8 @@ myPreBuild _ _ = do
 search pat dir =
   find always (fileName ~~? pat) dir
 
-convertToHtml = writeHtmlString def . readMarkdown def
+convertToHtml = (writeHtmlString def{writerHighlight = True
+                                    , writerExtensions = githubMarkdownExtensions}) . readMarkdown def
 
 convertFileToHtml file =
   let configFile = replaceExtension file "cfg"
