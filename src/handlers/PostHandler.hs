@@ -40,9 +40,9 @@ postHandler = do
           serve404
         Just cAtom ->
           if postExists cAtom (fromIntegral k) ps then
-              serve404
+            renderWithSplices "post" $ "post" ## postSplice c keyStr
           else
-              renderWithSplices "post" $ "post" ## postSplice c keyStr
+            serve404
   where
     serve404 = do
       modifyResponse $ setResponseStatus 404 "Post Not Found"

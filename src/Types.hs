@@ -17,6 +17,7 @@ module Types
 
 ------------------------------------------------------------------------------
 import Heist
+
 import Data.Maybe
 import Data.List as L
 import Data.Text.Encoding
