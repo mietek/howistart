@@ -9,6 +9,6 @@
       </div>
 
     </div>
-         <apply template="_posts" />
-    </div>
+    <apply template="_posts" />
+  </div>
 </apply>

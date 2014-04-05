@@ -14,7 +14,7 @@ main = defaultMainWithHooks myHooks
 
 myPreBuild _ _ = do
   dir   <- getCurrentDirectory
-  files <- search "*.pd" dir
+  files <- search "*.md" dir
   -- pandoc snaplets/heist/templates/posts/haskell/test.pd  --highlight-style pygments -o snaplets/heist/templates/posts/haskell/test.html
   forM files convertFileToHtml
   return (Nothing, [])
@@ -26,6 +26,6 @@ convertToHtml = writeHtmlString def . readMarkdown def
 
 convertFileToHtml file =
   let configFile = replaceExtension file "cfg"
-      newFile = replaceExtension file "html"
+      newFile = replaceExtension file "tpl"
   in
    readFile file >>= writeFile newFile . convertToHtml

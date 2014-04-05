@@ -12,6 +12,7 @@ module Site
 import Control.Monad.Trans
 import Control.Monad.State
 import Data.Monoid
+import Snap.Core
 import Snap.Snaplet
 import Snap.Snaplet.Heist
 import Snap.Util.FileServe
@@ -19,6 +20,7 @@ import Heist
 import qualified Data.Text as T
 import qualified Data.ByteString as B
 import qualified Heist.Interpreted as I
+
 ------------------------------------------------------------------------------
 import Application
 import Types
@@ -28,9 +30,9 @@ import CategoryHandler as C
 ------------------------------------------------------------------------------
 routes :: [(B.ByteString, Handler App App ())]
 routes = [
-  ("/", indexHandler)
-  ,("/posts/:category/:title", P.postHandler)
-  ,("/posts/:category", C.categoryHandler)
+  ("/", ifTop indexHandler)
+  ,("/posts/:category/:key", P.postHandler)
+  ,("/posts/:category", ifTop C.categoryHandler)
   ,("", serveDirectory "static")
   ]
 
@@ -38,10 +40,8 @@ indexHandler :: Handler App App ()
 indexHandler = do
   cs <- gets _categories
   ps <- gets _posts
-  liftIO $ print ps
-  renderWithSplices "/"
-    (do "categoryDesc" ## I.textSplice "hello"
-        "posts" ## I.mapSplices (I.runChildrenWith . splicesFromPost cs) ps)
+  renderWithSplices (B.intercalate "/" ["index"])
+      (do "posts" ## I.mapSplices (I.runChildrenWith . splicesFromPost cs) ps)
 
 renderList :: T.Text -> [T.Text] -> SnapletISplice App
 renderList label = I.mapSplices (\x -> I.runChildrenWith (label ## I.textSplice x))
@@ -58,7 +58,7 @@ app = makeSnaplet "app" "How I Start." Nothing $ do
   let config = mempty {
         hcInterpretedSplices = "categories" ## (renderList "category" categoryNames)
         }
+  addRoutes routes
   h <- nestSnaplet "" heist $ heistInit "templates"
   addConfig h config
-  addRoutes routes
   return $ App h c p

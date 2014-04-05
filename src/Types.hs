@@ -32,10 +32,10 @@ data Category = Category T.Text T.Text T.Text
 type Categories = [(CategoryAtom, Category)]
 
 data Post = Post {
-  title        :: T.Text
+  key           :: Integer
+  , title      :: T.Text
   , author     :: T.Text
   , category   :: CategoryAtom
-  , headshot   :: T.Text
   , subheading :: T.Text
   , bio        :: T.Text
   } deriving (Show, Read)
@@ -60,9 +60,9 @@ categoryName a c =
 
 splicesFromPost :: Monad n => Categories -> Post -> Splices (I.Splice n)
 splicesFromPost c p = do
+  "key"        ## I.textSplice (T.pack $ show (key p))
   "title"      ## I.textSplice (title p)
   "author"     ## I.textSplice (author p)
   "category"   ## I.textSplice (categoryName (category p) c)
-  "headshot"   ## I.textSplice (headshot p)
   "subheading" ## I.textSplice (subheading p)
   "bio"        ## I.textSplice (bio p)
