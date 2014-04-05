@@ -6,6 +6,10 @@ body {
   text-transform: capitalize;
 }
 
+.page-header {
+  text-transform: capitalize;
+}
+
 footer {
 	margin: 50px 0;
 }
