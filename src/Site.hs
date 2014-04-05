@@ -51,9 +51,9 @@ app :: SnapletInit App App
 app = makeSnaplet "app" "How I Start." Nothing $ do
   f <- liftIO $ Prelude.readFile "app.cfg"
   let p = read f :: Posts
-  let c = [(Haskell, Category "haskell" "Pure functional language" "http://haskell.org")
-          ,(Erlang, Category "erlang" "Concurrent functional language" "http://erlang.org")
-          ,(Elixir, Category "elixir" "Functional, meta-programming aware language built on top of the Erlang VM" "http://elixir-lang.org")]
+  let c = [(Haskell, Category "haskell" "Pure functional language." "http://haskell.org")
+          ,(Erlang, Category "erlang" "Concurrent functional language." "http://erlang.org")
+          ,(Elixir, Category "elixir" "Functional, meta-programming aware language built on top of the Erlang VM." "http://elixir-lang.org")]
   let categoryNames = [name | (_, Category name _ _) <- c]
   let config = mempty {
         hcInterpretedSplices = "categories" ## (renderList "category" categoryNames)

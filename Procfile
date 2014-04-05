@@ -1,1 +1,1 @@
-web: cabal run -- -p $PORT
+web: dist/build/howistart/howistart -p $PORT
