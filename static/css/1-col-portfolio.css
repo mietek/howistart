@@ -10,6 +10,6 @@ body {
   text-transform: capitalize;
 }
 
-footer {
-	margin: 50px 0;
+.footer {
+	margin-bottom: 100px;
 }
