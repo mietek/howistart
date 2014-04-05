@@ -8,7 +8,7 @@
     <title>How I Start.</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/readable.min.css" rel="stylesheet">
 
     <!-- Custom CSS for the 'Thumbnail Gallery' Template -->
     <link href="/css/1-col-portfolio.css" rel="stylesheet">
