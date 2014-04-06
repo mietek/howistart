@@ -29,6 +29,11 @@ import qualified Heist.Interpreted as I
 data CategoryAtom = Haskell
                   | Erlang
                   | Elixir
+                  | Go
+                  | Rust
+                  | Python
+                  | Ruby
+                  | Ocaml
                   deriving (Show, Read, Eq)
 
 data Category = Category T.Text T.Text T.Text
