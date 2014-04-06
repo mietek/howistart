@@ -1,5 +1,3 @@
-#!/usr/bin/env runhaskell
-
 import Distribution.Simple
 import Control.Monad
 import System.Environment
@@ -15,7 +13,6 @@ main = defaultMainWithHooks myHooks
 myPreBuild _ _ = do
   dir   <- getCurrentDirectory
   files <- search "*.md" dir
-  -- pandoc snaplets/heist/templates/posts/haskell/test.pd  --highlight-style pygments -o snaplets/heist/templates/posts/haskell/test.html
   forM files convertFileToHtml
   return (Nothing, [])
 
