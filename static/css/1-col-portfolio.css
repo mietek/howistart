@@ -1,5 +1,17 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
-	margin-top: 50px; /* 50px is the height of the navbar - change this if the navbarn height changes */
+  margin-top: 50px; /* 50px is the height of the navbar */
+}
+
+.wrapper {
+  height: 100%;
+  margin-bottom: -100px;
 }
 
 .category {
@@ -10,6 +22,12 @@ body {
   text-transform: capitalize;
 }
 
-.footer {
-	margin-bottom: 100px;
+
+footer {
+  position: relative;
+  bottom: 0px;
+}
+
+footer .row {
+  margin-bottom: 10px;
 }

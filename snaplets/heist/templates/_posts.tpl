@@ -18,6 +18,4 @@
     </div>
 
   </div>
-
-  <hr>
 </posts>

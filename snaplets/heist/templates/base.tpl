@@ -63,9 +63,29 @@
         <!-- /.container -->
     </nav>
 
-    <div id="content">
-      <apply-content />
+    <div class="container">
+      <div class="wrapper">
+        <div id="content">
+          <apply-content />
+        </div>
+      </div>
+
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <hr />
+          </div>
+          <div class="col-lg-4 col-lg-offset-9">
+            <small>Except where otherwise noted.</small>
+            <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/" title="Creative Commons License Details">
+              <img src="/static/images/cc.png" alt="Creative Commons Attribution Non-Commercial No Derivative License" />
+            </a>
+          </div>
+        </div>
+      </footer>
+
     </div>
+
 
     <!-- JavaScript -->
     <script src="/static/js/jquery-1.10.2.js"></script>
