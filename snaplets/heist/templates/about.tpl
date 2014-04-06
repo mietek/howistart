@@ -10,7 +10,8 @@
 
   <div class="row">
     <div class="col-lg-10 col-lg-offset-1">
-      About...
+      <p>Contact: <a href="mailto:contact@howistart.org">contact@howistart.org</a></p>
+      <p>About...</p>
     </div>
   </div>
 

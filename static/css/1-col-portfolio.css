@@ -9,11 +9,6 @@ body {
   margin-top: 50px; /* 50px is the height of the navbar */
 }
 
-.wrapper {
-  height: 100%;
-  margin-bottom: -100px;
-}
-
 .category {
   text-transform: capitalize;
 }
@@ -22,10 +17,9 @@ body {
   text-transform: capitalize;
 }
 
-
 footer {
-  position: relative;
-  bottom: 0px;
+  margin-top: 50px;
+  margin-bottom: 10px;
 }
 
 footer .row {
