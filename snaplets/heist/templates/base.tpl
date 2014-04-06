@@ -35,7 +35,6 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -54,7 +53,6 @@
                 <categories>
                   <li class="category"><a href="/posts/${category}"><category /></a></li>
                 </categories>
-
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="/about">About</a></li>

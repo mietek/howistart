@@ -31,8 +31,9 @@ import CategoryHandler as C
 routes :: [(B.ByteString, Handler App App ())]
 routes = [
   ("/", ifTop indexHandler)
-  ,("/posts/:category/:key", P.postHandler)
+  ,("/posts/:category/:key", ifTop P.postHandler)
   ,("/posts/:category", ifTop C.categoryHandler)
+  ,("/about", ifTop $ render "about")
   ,("/static", serveDirectory "static")
   ]
 

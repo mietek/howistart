@@ -8,6 +8,7 @@ module Types
     ,Post(..)
     ,Posts
     ,postExists
+    ,lookupPost
     ,lookupCategoryAtom
     ,lookupPostsByCategory
     ,lookupCategoryByName
@@ -49,6 +50,10 @@ type Posts = [Post]
 postExists :: CategoryAtom -> Integer -> Posts -> Bool
 postExists c k ps =
   isJust $ L.find (\p -> key p == k && category p == c) ps
+
+lookupPost :: CategoryAtom -> Integer -> Posts -> Maybe Post
+lookupPost c k ps =
+  L.find (\p -> key p == k && category p == c) ps
 
 lookupCategoryAtom :: B.ByteString -> Categories -> Maybe CategoryAtom
 lookupCategoryAtom c cs =

@@ -39,10 +39,13 @@ postHandler = do
         Nothing ->
           serve404
         Just cAtom ->
-          if postExists cAtom (fromIntegral k) ps then
-            renderWithSplices "post" $ "post" ## postSplice c keyStr
-          else
-            serve404
+          case lookupPost cAtom (fromIntegral k) ps of
+            Just p ->
+              renderWithSplices "post" $ (do
+                                             headerSplice c p
+                                             "post" ## postSplice c keyStr)
+            Nothing ->
+              serve404
   where
     serve404 = do
       modifyResponse $ setResponseStatus 404 "Post Not Found"
@@ -50,4 +53,12 @@ postHandler = do
 
 postSplice :: Monad m => B.ByteString -> B.ByteString -> I.Splice m
 postSplice c k =
-  I.callTemplate (B.intercalate "/" ["posts", encodeUtf8 (T.toLower (decodeUtf8 c)), k, "index"]) noSplices
+  let
+    cat = encodeUtf8 (T.toLower (decodeUtf8 c))
+  in
+   I.callTemplate (B.intercalate "/" ["posts", cat, k, "index"]) noSplices
+
+headerSplice :: Monad n => B.ByteString -> Post -> Splices (I.Splice n)
+headerSplice c p = do
+  "category" ## I.textSplice (decodeUtf8 c)
+  "author"   ## I.textSplice (author p)
