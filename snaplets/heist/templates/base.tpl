@@ -8,10 +8,10 @@
     <title>How I Start.</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/css/readable.min.css" rel="stylesheet">
+    <link href="/static/css/readable.min.css" rel="stylesheet">
 
     <!-- Custom CSS for the 'Thumbnail Gallery' Template -->
-    <link href="/css/1-col-portfolio.css" rel="stylesheet">
+    <link href="/static/css/1-col-portfolio.css" rel="stylesheet">
     <style type="text/css">code{white-space: pre;}</style>
     <style type="text/css">
       table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -55,7 +55,10 @@
                   <li class="category"><a href="/posts/${category}"><category /></a></li>
                 </categories>
 
-                </ul>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/about">About</a></li>
+              </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -67,8 +70,8 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="js/jquery-1.10.2.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <script src="/static/js/jquery-1.10.2.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
 
 </body>
 

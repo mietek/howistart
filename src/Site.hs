@@ -33,7 +33,7 @@ routes = [
   ("/", ifTop indexHandler)
   ,("/posts/:category/:key", P.postHandler)
   ,("/posts/:category", ifTop C.categoryHandler)
-  ,("", serveDirectory "static")
+  ,("/static", serveDirectory "static")
   ]
 
 indexHandler :: Handler App App ()
