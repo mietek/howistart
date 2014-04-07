@@ -42,7 +42,7 @@ data Category = Category T.Text T.Text T.Text
 type Categories = [(CategoryAtom, Category)]
 
 data Post = Post {
-  key           :: Integer
+  key          :: Integer
   , title      :: T.Text
   , author     :: T.Text
   , category   :: CategoryAtom
@@ -73,9 +73,8 @@ lookupPostsByCategory :: CategoryAtom -> Posts -> Posts
 lookupPostsByCategory c ps =
   Prelude.filter (\p -> category p == c) ps
 
-lookupCategoryByName :: Maybe B.ByteString -> Categories -> Maybe (CategoryAtom, Category)
-lookupCategoryByName Nothing _ = Nothing
-lookupCategoryByName (Just n) cs =
+lookupCategoryByName :: B.ByteString -> Categories -> Maybe (CategoryAtom, Category)
+lookupCategoryByName n cs =
   let
     lowerName = T.toLower (decodeUtf8 n)
   in

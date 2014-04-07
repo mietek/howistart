@@ -24,29 +24,19 @@ postHandler :: Handler App App ()
 postHandler = do
   cMaybe <- getParam "category"
   keyMaybe <- getParam "key"
-
-  let c = fromJust cMaybe
-  let keyStr = fromJust keyMaybe
-
   ps <- gets _posts
   cs <- gets _categories
 
-  case readInt keyStr of
-    Nothing ->
-      serve404
-    Just (k, _) ->
-      case lookupCategoryAtom c cs of
-        Nothing ->
-          serve404
-        Just cAtom ->
-          case lookupPost cAtom (fromIntegral k) ps of
-            Just p ->
-              renderWithSplices "post" $ (do
-                                             headerSplice c p
-                                             "post" ## postSplice c keyStr)
-            Nothing ->
-              serve404
+  fromMaybe serve404 (cMaybe >>= \c ->
+                       keyMaybe>>= \keyStr ->
+                       readInt keyStr >>= \(k, _) ->
+                       lookupCategoryAtom c cs >>= \cAtom ->
+                       lookupPost cAtom (fromIntegral k) ps >>= \p ->
+                       return $ renderPost c keyStr p)
   where
+    renderPost c k p = renderWithSplices "post" $ (do headerSplice c p
+                                                      "post" ## postSplice c k)
+
     serve404 = do
       modifyResponse $ setResponseStatus 404 "Post Not Found"
       renderWithSplices "404" $ "msg" ## I.textSplice "Post Not Found"

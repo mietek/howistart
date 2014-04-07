@@ -5,6 +5,7 @@ module CategoryHandler
   ) where
 
 ------------------------------------------------------------------------------
+import Data.Maybe
 import Control.Monad.State
 import Snap.Snaplet
 import Snap.Core
@@ -18,16 +19,19 @@ import Types
 
 categoryHandler :: Handler App App ()
 categoryHandler = do
-  c <- getParam "category"
+  cMaybe <- getParam "category"
   ps <- gets _posts
   cs <- gets _categories
-  case lookupCategoryByName c cs of
-    Nothing -> do
+  fromMaybe serve404 (cMaybe >>= \c ->
+                       lookupCategoryByName c cs >>= \(categoryAtom, Category n d _) ->
+                       return $ renderCategory n d cs (lookupPostsByCategory categoryAtom ps))
+  where
+    renderCategory n d cs ps =
+      renderWithSplices (B.intercalate "/" ["category"])
+      (do "category"     ## I.textSplice n
+          "categoryDesc" ## I.textSplice d
+          "posts"        ## I.mapSplices (I.runChildrenWith . splicesFromPost cs) ps)
+
+    serve404 = do
       modifyResponse $ setResponseStatus 404 "Category Not Found"
       renderWithSplices "404" $ "msg" ## I.textSplice "Category Not Found"
-    Just (categoryAtom, Category n d _) ->
-      renderWithSplices (B.intercalate "/" ["category"])
-        (do "category" ## I.textSplice n
-            "categoryDesc" ## I.textSplice d
-            "posts" ## I.mapSplices (I.runChildrenWith . splicesFromPost cs)
-              (lookupPostsByCategory categoryAtom ps))
