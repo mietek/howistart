@@ -42,23 +42,23 @@ data Category = Category T.Text T.Text T.Text
 type Categories = [(CategoryAtom, Category)]
 
 data Post = Post {
-  key          :: Integer
-  , title      :: T.Text
-  , author     :: T.Text
-  , category   :: CategoryAtom
-  , subheading :: T.Text
-  , bio        :: T.Text
+  _key          :: Integer
+  , _title      :: T.Text
+  , _author     :: T.Text
+  , _category   :: CategoryAtom
+  , _subheading :: T.Text
+  , _bio        :: T.Text
   } deriving (Show, Read)
 
 type Posts = [Post]
 
 postExists :: CategoryAtom -> Integer -> Posts -> Bool
 postExists c k ps =
-  isJust $ L.find (\p -> key p == k && category p == c) ps
+  isJust $ L.find (\p -> _key p == k && _category p == c) ps
 
 lookupPost :: CategoryAtom -> Integer -> Posts -> Maybe Post
 lookupPost c k ps =
-  L.find (\p -> key p == k && category p == c) ps
+  L.find (\p -> _key p == k && _category p == c) ps
 
 lookupCategoryAtom :: B.ByteString -> Categories -> Maybe CategoryAtom
 lookupCategoryAtom c cs =
@@ -71,7 +71,7 @@ lookupCategoryAtom c cs =
 
 lookupPostsByCategory :: CategoryAtom -> Posts -> Posts
 lookupPostsByCategory c ps =
-  Prelude.filter (\p -> category p == c) ps
+  Prelude.filter (\p -> _category p == c) ps
 
 lookupCategoryByName :: B.ByteString -> Categories -> Maybe (CategoryAtom, Category)
 lookupCategoryByName n cs =
@@ -86,9 +86,9 @@ categoryName a c =
 
 splicesFromPost :: Monad n => Categories -> Post -> Splices (I.Splice n)
 splicesFromPost c p = do
-  "key"        ## I.textSplice (T.pack $ show (key p))
-  "title"      ## I.textSplice (title p)
-  "author"     ## I.textSplice (author p)
-  "category"   ## I.textSplice (categoryName (category p) c)
-  "subheading" ## I.textSplice (subheading p)
-  "bio"        ## I.textSplice (bio p)
+  "key"        ## I.textSplice (T.pack $ show (_key p))
+  "title"      ## I.textSplice (_title p)
+  "author"     ## I.textSplice (_author p)
+  "category"   ## I.textSplice (categoryName (_category p) c)
+  "subheading" ## I.textSplice (_subheading p)
+  "bio"        ## I.textSplice (_bio p)

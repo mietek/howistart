@@ -51,4 +51,4 @@ postSplice c k =
 headerSplice :: Monad n => B.ByteString -> Post -> Splices (I.Splice n)
 headerSplice c p = do
   "category" ## I.textSplice (decodeUtf8 c)
-  "author"   ## I.textSplice (author p)
+  "author"   ## I.textSplice (_author p)
