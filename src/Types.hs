@@ -33,6 +33,7 @@ data CategoryAtom = Haskell
                   | Rust
                   | Python
                   | Ruby
+                  | Clojure
                   | Ocaml
                   deriving (Show, Read, Eq)
 
