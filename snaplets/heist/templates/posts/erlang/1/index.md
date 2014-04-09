@@ -34,6 +34,8 @@ get ready to write a few things.
 
 ## My Environment
 
+![](/static/images/fred/env.png)
+
 Despite you being free to develop on whatever you want, I'm gonna go through
 whatever my setup is.
 
@@ -44,8 +46,10 @@ in vi-mode, because vim vim vim.
 
 For vim itself, to work with Erlang, I use these two lines in my .vimrc file:
 
-    autocmd BufRead,BufNewFile *.erl,*.es.*.hrl,*.yaws,*.xrl set expandtab
-    au BufNewFile,BufRead *.erl,*.es,*.hrl,*.yaws,*.xrl setf erlang
+```VimL
+autocmd BufRead,BufNewFile *.erl,*.es.*.hrl,*.yaws,*.xrl set expandtab
+au BufNewFile,BufRead *.erl,*.es,*.hrl,*.yaws,*.xrl setf erlang
+```
 
 And I depend on these two plugins:
 
@@ -69,17 +73,17 @@ Our project will be the replication of one of the most well-known software
 programs in popular history, used in life-critical situations: Homer Simpson's
 console in the episode where he's so fat he can work at home.
 
-http://stream1.gifsoup.com/view5/3059049/homer-computer-o.gif
+![](/static/images/fred/homer-computer.gif)
 
 From this episode we can infer the following about the software:
 
 - When the program boots, it asks you to press any key.
-- The program will ask you questions that can be answered by 'yes/no', but
-  also 'Y/N' or 'y/n'
+- The program will ask you questions that can be answered by `yes/no`, but
+  also `Y/N` or `y/n`
 - Most questions can be turned into commands. Each assertion is equivalent to
-  answering a given question positively. For example, 'Vent radioactive gas? Yes/No'
-  can be turned into the 'Vent gas' command.
-- Nothing should go wrong if you keep pressing 'Y' all the time
+  answering a given question positively. For example, `Vent radioactive gas? Yes/No`
+  can be turned into the `Vent gas` command.
+- Nothing should go wrong if you keep pressing `Y` all the time
 - After a given delay, a new question is asked
 - Too many times without venting radioactive gas risks exploding everything
 - Some behaviours aren't defined by the TV show, so we go somewhat
@@ -126,24 +130,23 @@ state transitions. I've also looked for transcripts of the show and extracted
 the following questions and consequences:
 
 1. Check core temperature. yes/no:
-   - yes: Core temperature normal.
-   - no: --
+   - `yes`: Core temperature normal.
+   - `no`: --
 
 2. Vent radioactive gas?
-   - yes: *gas blows away corn crop*
-   - no: venting prevents explosion (allow 'yes', show only the first time?)
+   - `yes`: \*gas blows away corn crop\*
+   - `no`: venting prevents explosion (allow `yes`, show only the first time?)
 
 3. Sound alertness horn?
-   - yes: *horn sounds in the distance*
-   - no: --
+   - `yes`: \*horn sounds in the distance\*
+   - `no`: --
 
 4. Decalcify calcium ducts?
-   - yes: --
-   - no: --
+   - `yes`: --
+   - `no`: --
 
 5. Special case: after denying venting too many times, the valve must
    be disabled manually.
-
 
 The simplest way to write a basic FSM for this one is to use a bunch of function
 calls. Given Erlang has tail call optimization (a call that happens as a return
@@ -322,8 +325,8 @@ opts() ->
 This basically is a tuple (I use a tuple because it makes random selection with
 a fixed position more efficient) of all questions, positive and negative
 response and consequences, paired up with a regular expression that represents
-fuzzy matching -- for example, someone typing it 'check temperature' should
-match 'Check core temperature?' as a question, and return both options. The
+fuzzy matching -- for example, someone typing it `check temperature` should
+match `Check core temperature?` as a question, and return both options. The
 code back in `wait_for_command/0` will only execute the `core_temperature/0`
 function.
 
@@ -344,8 +347,7 @@ blow_crops_away() -> io:format("*Gas blows away corn crop*~n").
 
 sound_horn() -> io:format("*horn sounds in the distance*~n").
 
-pressure_too_high() -> io:format("Pressure too high. Tank must be shut down
-manually.~n").
+pressure_too_high() -> io:format("Pressure too high. Tank must be shut down manually.~n").
 
 vent_gas() ->
     %% After ?MAX_NO_VENT, pressure has to be shut down
@@ -398,6 +400,8 @@ Unfortunately, that's what I'm exactly gonna show: how to put that in
 production. As much as I enjoy getting production-grade software out of the
 door, people playing the language will have different requirements.
 
+![](/static/images/fred/muumuu.gif)
+
 
 ## Making it a library
 
@@ -423,7 +427,7 @@ That's all you need if you have rebar installed in your system.
 Add a file in `src/` called `muumuu.app.src`. This file is basically telling
 Erlang (and rebar) what the library is:
 
-```
+```erlang
 {application, muumuu, [
   {description, "Too fat to go to the power plant app"},
   {vsn, "0.1.0"},
@@ -527,6 +531,9 @@ pull it within their code.
 In order to run it ourselves and actually ship it to customers, we will need to
 build a release.
 
+![](/static/images/fred/y-y-y.gif)
+
+
 ## Releases
 
 The directory structure we've been using was for an application and turns out
@@ -608,9 +615,9 @@ release successfully created!
 And a release is born! To run it:
 
 ```
-    λ → ./_rel/bin/muumuu -noshell
-    To Start, Press Any Key.
-    >
+λ → ./_rel/bin/muumuu -noshell
+To Start, Press Any Key.
+>
 ```
 
 Pretty cool. This can now be shipped and distributed to people.
@@ -744,10 +751,11 @@ fact when I know I'll have to maintain it.
 For this, each app should have its tests, so I'll have to add a `test/`
 directory in `apps/muumuu/`.
 
-My tool of choice is Common Test (link), which while it is kind of full of
-annoying overheads for unit testing and is mostly useless for shell output
-(you gotta deal with HTML files), it scales fairly well for integration and
-system tests.
+My tool of choice is [Common
+Test](http://learnyousomeerlang.com/common-test-for-uncommon-tests), which
+while it is kind of full of annoying overheads for unit testing and is mostly
+useless for shell output (you gotta deal with HTML files), it scales fairly
+well for integration and system tests.
 
 The test suite in there is going to be `muumuu_SUITE.erl`:
 
@@ -967,4 +975,5 @@ release structure to build and ship a release.
 
 After this, I go do something else because I'm pretty much done.
 
+![](/static/images/ferd/outdoors.gif)
 
