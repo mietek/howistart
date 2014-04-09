@@ -975,5 +975,5 @@ release structure to build and ship a release.
 
 After this, I go do something else because I'm pretty much done.
 
-![](/static/images/ferd/outdoors.gif)
+![](/static/images/fred/outdoors.gif)
 
