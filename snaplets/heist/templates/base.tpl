@@ -38,22 +38,23 @@
     <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">How I Start.</a>
+              <button type="button" class="navbar-toggle" data-toggle="collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="/">How I Start.</a>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <div class="collapse navbar-collapse">
               <ul class="nav navbar-nav">
                 <categories>
                   <li class="category"><a href="/posts/${category}"><category /></a></li>
                 </categories>
               </ul>
+
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="/about">About</a></li>
               </ul>
@@ -64,28 +65,24 @@
     </nav>
 
     <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
 
-          <div id="content">
-            <apply-content />
-          </div>
-
-          <footer>
-            <hr />
-            <div class="row">
-              <div class="col-lg-4 col-lg-offset-8">
-                <p class="text-right">
-                  <small>Except where otherwise noted.</small>
-                  <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/" title="Creative Commons License Details">
-                    <img src="/static/images/cc.png" alt="Creative Commons Attribution Non-Commercial No Derivative License" />
-                  </a>
-                </p>
-              </div>
-            </div>
-          </footer>
-        </div>
+      <div id="content">
+        <apply-content />
       </div>
+
+      <footer>
+        <hr />
+        <div class="row">
+          <div class="col-md-4 col-md-offset-8">
+            <p class="text-right">
+              <small>Except where otherwise noted.</small>
+              <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/" title="Creative Commons License Details">
+                <img src="/static/images/cc.png" alt="Creative Commons Attribution Non-Commercial No Derivative License" />
+              </a>
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
 
 
