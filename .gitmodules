@@ -1,0 +1,3 @@
+[submodule "snaplets/heist/templates/posts"]
+	path = snaplets/heist/templates/posts
+	url = git@github.com:howistart/howistart.git

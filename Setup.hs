@@ -1,10 +1,15 @@
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ExtendedDefaultRules #-}
+{-# OPTIONS_GHC -fno-warn-type-defaults #-}
+
+import Shelly
 import Distribution.Simple
 import Control.Monad
 import System.Environment
 import System.Directory
-import System.FilePath.Find
+import System.FilePath.Find as F
 import System.FilePath.Posix
-
+import qualified Data.Text as T
 import Text.Pandoc
 
 main = defaultMainWithHooks myHooks
@@ -12,18 +17,24 @@ main = defaultMainWithHooks myHooks
 
 myPreBuild _ _ = do
   dir   <- getCurrentDirectory
-  files <- search "*.md" dir
+  files <- search "*.md" $ joinPath [dir, "snaplets", "heist", "templates", "posts"]
   forM files convertFileToHtml
   return (Nothing, [])
 
 search pat dir =
-  find always (fileName ~~? pat) dir
+  F.find always (fileName ~~? pat) dir
 
 convertToHtml = (writeHtmlString def{writerHighlight = True
                                     , writerExtensions = githubMarkdownExtensions}) . readMarkdown def
 
 convertFileToHtml file =
-  let configFile = replaceExtension file "cfg"
-      newFile = replaceExtension file "tpl"
-  in
-   readFile file >>= writeFile newFile . convertToHtml
+  let newFile = replaceExtension file "tpl"
+      dir = takeDirectory file
+  in do
+    copy_images (fromText $ T.pack $ joinPath [dir, "images"])
+    readFile file >>= writeFile newFile . convertToHtml
+
+copy_images dir = shelly $ verbosely $ do
+  images <- ls dir
+  mapM_ (\f -> cp_r f (fromText . T.pack $ joinPath ["static", "images"])) images
+  return ()
