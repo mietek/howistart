@@ -24,6 +24,7 @@ import qualified Heist.Interpreted as I
 ------------------------------------------------------------------------------
 import Application
 import Types
+import Utils
 import PostHandler as P
 import CategoryHandler as C
 
@@ -39,6 +40,7 @@ routes = [
 
 indexHandler :: Handler App App ()
 indexHandler = do
+  infoLog ["handler" <=> "indexHandler", "handler" <=> 1, "handler" <=> 2]  
   cs <- gets _categories
   ps <- gets _posts
   renderWithSplices (B.intercalate "/" ["index"])

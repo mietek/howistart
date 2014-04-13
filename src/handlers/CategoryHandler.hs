@@ -16,9 +16,11 @@ import qualified Heist.Interpreted as I
 ------------------------------------------------------------------------------
 import Application
 import Types
+import Utils
 
 categoryHandler :: Handler App App ()
 categoryHandler = do
+  infoLog ["handler" <=> "categoryHandler"]  
   cMaybe <- getParam "category"
   ps <- gets _posts
   cs <- gets _categories

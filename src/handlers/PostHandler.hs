@@ -19,16 +19,18 @@ import qualified Heist.Interpreted as I
 ------------------------------------------------------------------------------
 import Application
 import Types
+import Utils
 
 postHandler :: Handler App App ()
 postHandler = do
+  infoLog ["handler" <=> "postHandler"]  
   cMaybe <- getParam "category"
   keyMaybe <- getParam "key"
   ps <- gets _posts
   cs <- gets _categories
 
   fromMaybe serve404 (cMaybe >>= \c ->
-                       keyMaybe>>= \keyStr ->
+                       keyMaybe >>= \keyStr ->
                        readInt keyStr >>= \(k, _) ->
                        lookupCategoryAtom c cs >>= \cAtom ->
                        lookupPost cAtom (fromIntegral k) ps >>= \p ->
