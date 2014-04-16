@@ -40,10 +40,10 @@ routes = [
 
 indexHandler :: Handler App App ()
 indexHandler = do
-  infoLog ["handler" <=> "indexHandler", "handler" <=> 1, "handler" <=> 2]  
+  infoLog ["handler" <=> "indexHandler"]  
   cs <- gets _categories
   ps <- gets _posts
-  renderWithSplices (B.intercalate "/" ["index"])
+  renderWithSplices (B.intercalate "/" ["index"]) 
       ("posts" ## I.mapSplices (I.runChildrenWith . splicesFromPost cs) ps)
 
 renderList :: T.Text -> [T.Text] -> SnapletISplice App
