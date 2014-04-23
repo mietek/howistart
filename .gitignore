@@ -3,3 +3,4 @@
 dist/
 log/
 snaplets/heist/templates/posts/*/*/index.tpl
+cabal.sandbox.config
