@@ -4,7 +4,7 @@
     <div class="col-lg-6 col-lg-6">
       <div class="col-lg-5 col-lg-offset-5">
         <a href="/posts/${category}/${key}">
-          <img class="img-responsive" src="/static/images/${key}/headshot.png" alt="">
+          <img class="img-responsive img-circle" src="/static/images/${category}/${key}/headshot.png" alt="">
         </a>
       </div>
     </div>

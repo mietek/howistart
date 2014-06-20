@@ -23,12 +23,11 @@ import Utils
 
 postHandler :: Handler App App ()
 postHandler = do
-  infoLog ["handler" <=> "postHandler"]  
+  infoLog ["handler" <=> "postHandler"]
   cMaybe <- getParam "category"
   keyMaybe <- getParam "key"
   ps <- gets _posts
   cs <- gets _categories
-
   fromMaybe serve404 (cMaybe >>= \c ->
                        keyMaybe >>= \keyStr ->
                        readInt keyStr >>= \(k, _) ->
