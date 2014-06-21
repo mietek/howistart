@@ -22,6 +22,9 @@ import           Snap.Http.Server
 import           Snap.Snaplet
 import           Snap.Snaplet.Config
 import           Snap.Core
+import qualified Data.ByteString.Char8 as BS
+import           Snap.Util.Proxy
+import           System.Environment
 import           System.IO
 import           Site
 
@@ -91,8 +94,13 @@ main = do
 -- This action is only run once, regardless of whether development or
 -- production mode is in use.
 getConf :: IO (Config Snap AppConfig)
-getConf = commandLineAppConfig defaultConfig
-
+getConf = do
+  port <- getEnv "PORT"
+  commandLineAppConfig $ setPort (read port)
+                       . setAccessLog (ConfigIoLog BS.putStrLn)
+                       . setErrorLog (ConfigIoLog BS.putStrLn)
+                       . setProxyType X_Forwarded_For
+                       $ emptyConfig
 
 ------------------------------------------------------------------------------
 -- | This function generates the the site handler and cleanup action from the
