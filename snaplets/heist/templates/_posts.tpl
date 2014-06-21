@@ -4,7 +4,7 @@
     <div class="col-lg-6 col-lg-6">
       <div class="col-lg-5 col-lg-offset-5">
         <a href="/posts/${category}/${key}">
-          <img class="img-responsive img-circle" src="/static/images/${category}/${key}/headshot.png" alt="">
+          <img class="img-responsive" src="/static/images/${category}/${key}/headshot.png" alt="">
         </a>
       </div>
     </div>
@@ -17,5 +17,11 @@
       <a class="btn btn-primary" href="/posts/${category}/${key}">Read <span class="glyphicon glyphicon-chevron-right"></span></a>
     </div>
 
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 col-lg-12">
+      <hr />
+    </div>
   </div>
 </posts>

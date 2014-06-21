@@ -38,7 +38,8 @@ Executable howistart
     xmlhtml                   >= 0.1,
     filemanip                 >= 0.3.6.2,
     yaml                      >= 0.8.7.2,
-    pandoc                    >= 1.12.3.3
+    pandoc                    >= 1.12.3.3,
+    blaze-markup              == 0.6.0.0
 
   if flag(old-base)
     build-depends:

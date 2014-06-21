@@ -3,6 +3,7 @@
 module Utils
        ( infoLog
        , (<=>)
+       , showBS
        ) where
 
 import Snap.Core

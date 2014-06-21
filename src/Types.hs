@@ -25,6 +25,7 @@ import Data.Text.Encoding
 import qualified Data.Text as T
 import qualified Data.ByteString as B
 import qualified Heist.Interpreted as I
+import Text.XmlHtml
 
 data CategoryAtom = Haskell
                   | Erlang
@@ -92,4 +93,12 @@ splicesFromPost c p = do
   "author"     ## I.textSplice (_author p)
   "category"   ## I.textSplice (categoryName (_category p) c)
   "subheading" ## I.textSplice (_subheading p)
-  "bio"        ## I.textSplice (_bio p)
+  "bio"        ## bio p
+
+bio :: Monad n => Post -> I.Splice n
+bio p = do
+  case parseHTML "bio" (encodeUtf8 $ _bio p) of
+    (Right doc) ->
+      return $ docContent doc
+    (Left e) ->
+      I.textSplice (T.pack e)
