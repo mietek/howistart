@@ -4,3 +4,5 @@ dist/
 log/
 snaplets/heist/templates/posts/*/*/index.tpl
 cabal.sandbox.config
+static/images/erlang
+static/images/ruby

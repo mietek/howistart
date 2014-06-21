@@ -38,8 +38,12 @@ copy_images dir = shelly $ verbosely $ do
   exists <- test_d dir
   case exists of
     True -> do
+      let sp = splitPath $ T.unpack (toTextIgnore dir)
+      let path = joinPath (init $ drop (length sp - 3) sp)
+      let newPath = fromText $ T.pack $ joinPath ["static", "images", path]
+      mkdir_p newPath
       images <- ls dir
-      mapM_ (\f -> cp_r f (fromText . T.pack $ joinPath ["static", "images"])) images
+      mapM_ (\f -> cp_r f newPath) images
       return ()
     False ->
       return ()
