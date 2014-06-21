@@ -35,6 +35,11 @@ convertFileToHtml file =
     readFile file >>= writeFile newFile . convertToHtml
 
 copy_images dir = shelly $ verbosely $ do
-  images <- ls dir
-  mapM_ (\f -> cp_r f (fromText . T.pack $ joinPath ["static", "images"])) images
-  return ()
+  exists <- test_d dir
+  case exists of
+    True -> do
+      images <- ls dir
+      mapM_ (\f -> cp_r f (fromText . T.pack $ joinPath ["static", "images"])) images
+      return ()
+    False ->
+      return ()
