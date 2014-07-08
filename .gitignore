@@ -6,3 +6,5 @@ snaplets/heist/templates/posts/*/*/index.tpl
 cabal.sandbox.config
 static/images/erlang
 static/images/ruby
+static/images/elixir
+

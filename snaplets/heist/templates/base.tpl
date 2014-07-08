@@ -89,7 +89,6 @@
     <!-- JavaScript -->
     <script src="/static/js/jquery-1.10.2.js"></script>
     <script src="/static/js/bootstrap.js"></script>
-
 </body>
 
 </html>
