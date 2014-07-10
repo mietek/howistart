@@ -7,6 +7,8 @@
 
     <title>How I Start.</title>
 
+    <link href="/static/posts.rss" rel="alternate" type="application/rss+xml" title="How I Start." />
+
     <!-- Bootstrap core CSS -->
     <link href="/static/css/readable.min.css" rel="stylesheet">
 

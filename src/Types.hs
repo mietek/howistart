@@ -50,6 +50,7 @@ data Post = Post {
   , _category   :: CategoryAtom
   , _subheading :: T.Text
   , _bio        :: T.Text
+  , _published  :: T.Text
   } deriving (Show, Read)
 
 type Posts = [Post]
