@@ -31,7 +31,7 @@ Executable howistart
     snap-core                 >= 0.9     && < 0.11,
     snap-server               >= 0.9     && < 0.11,
     snap-loader-static        >= 0.9     && < 0.10,
-    text                      >= 0.11    && < 1.2,
+    text                      >= 1.1    && < 1.2,
     shelly                    >= 1.5.2,
     time                      >= 1.1     && < 1.5,
     configurator              >= 0.2.0.2 && < 0.3,
@@ -40,6 +40,7 @@ Executable howistart
     yaml                      >= 0.8.7.2,
     pandoc                    >= 1.12.3.3,
     blaze-markup              == 0.6.0.0,
+    blaze-builder             == 0.3.3.2,
     network                   >= 2.4.1.2,
     rss
 
