@@ -1,0 +1,9 @@
+{
+  "name": "howistart.org",
+  "description": "Haskell/Snap web publication",
+  "website": "http://howistart.org/",
+  "repository": "https://github.com/howistart/howistart.org",
+  "env": {
+    "BUILDPACK_URL": "https://github.com/mietek/haskell-on-heroku.git"
+  }
+}

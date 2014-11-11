@@ -1,49 +1,49 @@
-## How I Start
+_howistart.org_
+===============
 
-This site is for [howistart.org](http://www.howistart.org). It is built using the [Haskell](http://www.haskell.org) web framework [Snap](http://snapframework.com/) and deployed to [Heroku](http://heroku.com) using [Haskell on Heroku](https://github.com/mietek/haskell-on-heroku).
+Haskell/[Snap](http://snapframework.com/) web publication.
 
-### Building
 
-The posts are stored in a [submodule](https://github.com/howistart/howistart.git) so use `--recursive` when cloning this repo.
+Usage
+-----
 
-```shell
-$ git clone --recursive https://github.com/howistart/howistart.org.git
-$ cabal sandbox init
-$ cabal install --only-dependencies
-$ cabal build
-$ PORT=8080 cabal run
-Preprocessing executable 'howistart' for howistart-0.1...
-Initializing app @ /
-Initializing heist @ /
-...loaded 9 templates from howistart.org/snaplets/heist/templates
+### Deploying with [Halcyon](http://halcyon.sh/)
 
-Listening on http://0.0.0.0:8080/
-[28/Jun/2014:19:38:24 -0500] Server.httpServe: START, binding to [http://0.0.0.0:8080/]
+With Halcyon installed:
+
+```
+$ halcyon deploy https://github.com/mietek/howistart.org#halcyon
+$ cd $HALCYON_DIR/app
+$ PORT=8080 howistart
 ```
 
-### Deploying to Heroku
+- [Learn more](http://halcyon.sh/examples/#howistart.org)
 
-```shell
-$ heroku create -b https://github.com/mietek/haskell-on-heroku.git
+
+### Deploying with [Haskell on Heroku](http://haskellonheroku.com/)
+
+Ready to deploy to Heroku in two clicks.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/mietek/howistart.org/tree/halcyon/)
+
+Alternatively, with Heroku Toolbelt installed:
+
+```
+$ git clone https://github.com/mietek/howistart.org -b halcyon
+$ cd howistart.org
+$ heroku create -b https://github.com/mietek/haskell-on-heroku -s cedar-14
 $ git push heroku master
-```
-
-This push is expected to fail. But now we can prepare the dependencies:
-
-```shell
-$ heroku run --size=PX prepare
-```
-
-And now push again with a change or use rebuild:
-
-```shell
-$ heroku plugins:install https://github.com/heroku/heroku-repo.git
-$ heroku repo:rebuild
 $ heroku ps:scale web=1
-```
-
-And finally open:
-
-```shell
 $ heroku open
 ```
+
+- [Deploy to Heroku](https://heroku.com/deploy?template=https://github.com/mietek/howistart.org/tree/halcyon/)
+- [Learn more](http://haskellonheroku.com/examples/#howistart.org)
+
+
+About
+-----
+
+Made by [Tristan Sloughter](https://github.com/howistart/howistart.org/).  Published under the [GNU GPL](https://github.com/mietek/howistart.org/blob/halcyon/LICENSE).
+
+Deployment by [Miëtek Bak](http://mietek.io/).
