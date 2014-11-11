@@ -14,15 +14,13 @@ Flag development
   Description: Whether to build the server in development (interpreted) mode
   Default: False
 
-Flag old-base
-  default: False
-  manual: False
-
 Executable howistart
   hs-source-dirs: src
   main-is: Main.hs
 
   Build-depends:
+    base                      >= 4.4     && < 5,
+    lens                      >= 3.7.6   && < 4.5,
     bytestring                >= 0.9.1   && < 0.11,
     heist                     >= 0.13    && < 0.14,
     MonadCatchIO-transformers >= 0.2.1   && < 0.4,
@@ -43,15 +41,6 @@ Executable howistart
     blaze-builder             == 0.3.3.2,
     network                   >= 2.4.1.2,
     rss
-
-  if flag(old-base)
-    build-depends:
-      base                      >= 4        && < 4.4,
-      lens                      >= 3.7.6    && < 3.8
-  else
-    build-depends:
-      base                      >= 4.4      && < 5,
-      lens                      >= 3.7.6    && < 4.1
 
   if flag(development)
     build-depends:
