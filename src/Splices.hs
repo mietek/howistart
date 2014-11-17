@@ -76,10 +76,47 @@ author cs ps = do
       (Just p) = lookupPost categoryAtom (fromIntegral k) ps
     in return [_author p]
 
+titleSplice :: MonadSnap n => Categories -> Posts -> RuntimeSplice n [T.Text]
+titleSplice cs ps = do
+  (Just c) <- lift $ getParam "category"
+  (Just key) <- lift $ getParam "key"
+  let Just (categoryAtom, Category{}) = lookupCategoryByName c cs
+      (Just (k, _)) = readInt key
+      (Just p) = lookupPost categoryAtom (fromIntegral k) ps
+    in return [_title p]
+
+subheadingSplice :: MonadSnap n => Categories -> Posts -> RuntimeSplice n [T.Text]
+subheadingSplice cs ps = do
+  (Just c) <- lift $ getParam "category"
+  (Just key) <- lift $ getParam "key"
+  let Just (categoryAtom, Category{}) = lookupCategoryByName c cs
+      (Just (k, _)) = readInt key
+      (Just p) = lookupPost categoryAtom (fromIntegral k) ps
+    in return [_subheading p]
+
+bioSplice :: MonadSnap n => Categories -> Posts -> RuntimeSplice n [T.Text]
+bioSplice cs ps = do
+  (Just c) <- lift $ getParam "category"
+  (Just key) <- lift $ getParam "key"
+  let Just (categoryAtom, Category{}) = lookupCategoryByName c cs
+      (Just (k, _)) = readInt key
+      (Just p) = lookupPost categoryAtom (fromIntegral k) ps
+    in return [_bio p]
+
+keySplice :: MonadSnap n => RuntimeSplice n [T.Text]
+keySplice = do
+  (Just key) <- lift $ getParam "key"
+  let (Just (k, _)) = readInt key
+    in return [T.pack (show k)]
+
 postHeader :: MonadSnap n => Categories -> Posts -> Splices (C.Splice n)
 postHeader cs ps = do
-  "category" ## C.deferMany (C.pureSplice . C.textSplice $ id) $ category cs
-  "author"   ## C.deferMany (C.pureSplice . C.textSplice $ id) $ author cs ps
+  "keySplice"        ## C.deferMany (C.pureSplice . C.textSplice $ id) $ keySplice
+  "category"         ## C.deferMany (C.pureSplice . C.textSplice $ id) $ category cs
+  "author"           ## C.deferMany (C.pureSplice . C.textSplice $ id) $ author cs ps
+  "titleSplice"      ## C.deferMany (C.pureSplice . C.textSplice $ id) $ titleSplice cs ps
+  "subheadingSplice" ## C.deferMany (C.pureSplice . C.textSplice $ id) $ subheadingSplice cs ps
+  "bioSplice"        ## C.deferMany (C.pureSplice . C.textSplice $ id) $ bioSplice cs ps
 
 allPostsForCategory :: MonadSnap n => Categories -> Posts -> Splices (C.Splice n)
 allPostsForCategory cs ps = do
