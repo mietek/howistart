@@ -16,6 +16,8 @@ most cases you'll never need to modify this code.
 module Main where
 
 ------------------------------------------------------------------------------
+import           Paths_howistart
+
 import           Control.Exception (SomeException, try)
 import qualified Data.Text as T
 import           Snap.Http.Server
@@ -24,6 +26,7 @@ import           Snap.Snaplet.Config
 import           Snap.Core
 import qualified Data.ByteString.Char8 as BS
 import           Snap.Util.Proxy
+import           System.Directory
 import           System.Environment
 import           System.IO
 import           Site
@@ -70,6 +73,8 @@ import           Snap.Loader.Static
 --
 main :: IO ()
 main = do
+    dataDir <- getDataDir
+    setCurrentDirectory dataDir
     -- Depending on the version of loadSnapTH in scope, this either enables
     -- dynamic reloading, or compiles it without. The last argument to
     -- loadSnapTH is a list of additional directories to watch for changes to
