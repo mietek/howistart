@@ -9,29 +9,6 @@ Stability:           Experimental
 Category:            Web
 Build-type:          Custom
 Cabal-version:       >=1.2
-Data-files:          app.cfg
-                     snaplets/heist/templates/*.tpl
-                     snaplets/heist/templates/posts/elixir/1/*.tpl
-                     snaplets/heist/templates/posts/erlang/1/*.tpl
-                     snaplets/heist/templates/posts/go/1/*.tpl
-                     snaplets/heist/templates/posts/ruby/1/*.tpl
-                     static/css/*.css
-                     static/css/*.min.css
-                     static/fonts/*.eot
-                     static/fonts/*.svg
-                     static/fonts/*.ttf
-                     static/fonts/*.woff
-                     static/images/*.png
-                     static/images/elixir/1/*.jpeg
-                     static/images/elixir/1/*.png
-                     static/images/erlang/1/*.gif
-                     static/images/erlang/1/*.png
-                     static/images/go/1/*.png
-                     static/images/ruby/1/*.png
-                     static/js/*.js
-                     static/js/*.min.js
-                     static/js/highlight.pack.js
-                     static/js/jquery-1.10.2.js
 
 Flag development
   Description: Whether to build the server in development (interpreted) mode
@@ -63,6 +40,7 @@ Executable howistart
     blaze-markup              == 0.6.0.0,
     blaze-builder             == 0.3.3.2,
     network                   >= 2.4.1.2,
+    network-uri,
     rss,
     directory
 

@@ -1,9 +1,12 @@
 {
-  "name": "howistart.org",
-  "description": "Haskell/Snap web publication",
-  "website": "http://howistart.org/",
-  "repository": "https://github.com/howistart/howistart.org",
+  "name": "How I Start",
+  "description": "Collection of software development tutorials",
+  "logo": "https://halcyon.sh/logo.svg",
+  "repository": "https://github.com/mietek/howistart",
   "env": {
-    "BUILDPACK_URL": "https://github.com/mietek/haskell-on-heroku.git"
+    "BUILDPACK_URL": {
+      "description": "Heroku buildpack for deploying Haskell apps",
+      "value": "https://github.com/mietek/haskell-on-heroku"
+    }
   }
 }
